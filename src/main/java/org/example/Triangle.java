@@ -1,6 +1,24 @@
 package org.example;
 
 public class Triangle {
+
+    public Triangle(int height){
+        this.height = height;
+    }
+    public Triangle(String type){
+        this.type = type;
+    }
+    public  Triangle(String type, int height){
+        this.type = type;
+        this.height = height;
+    }
+    private String type;
+    private int height;
+
+    public int getHeight() {
+        return height;
+    }
+
     public String getType() {
         return type;
     }
@@ -9,8 +27,7 @@ public class Triangle {
         this.type = type;
     }
 
-    private String type;
     public void draw(){
-        System.out.println(type + " drawing triangle shape");
+        System.out.println(type + " drawing triangle shape of height " + height);
     }
 }
