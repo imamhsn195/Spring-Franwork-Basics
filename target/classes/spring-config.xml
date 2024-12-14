@@ -4,24 +4,18 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
 >
-    <bean id="Triangle" class="org.example.Triangle">
-        <property name="points">
-            <list>
-                <ref bean="zeroPoint"/>
-                <ref bean="point2"/>
-                <ref bean="point3"/>
-            </list>
-        </property>
+    <bean id="Triangle" class="org.example.Triangle" autowire="constructor">
+
     </bean>
-    <bean class="org.example.Point" id="zeroPoint">
+    <bean class="org.example.Point" id="pointA">
         <property name="x" value="0"/>
         <property name="y" value="0"/>
     </bean>
-    <bean class="org.example.Point" id="point2">
+    <bean class="org.example.Point" id="pointB">
         <property name="x" value="-20"/>
         <property name="y" value="0"/>
     </bean>
-    <bean class="org.example.Point" id="point3">
+    <bean class="org.example.Point" id="pointC">
         <property name="x" value="0"/>
         <property name="y" value="-20"/>
     </bean>
