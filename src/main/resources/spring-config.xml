@@ -4,24 +4,25 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
 >
-    <bean id="Triangle" class="org.example.Triangle" name="triangle-alias">
-        <property name="PointA" ref="zeroPoint"/>
-        <property name="PointB">
-            <bean class="org.example.Point">
-                <property name="x" value="-20"/>
-                <property name="y" value="0"/>
-            </bean>
-        </property>
-        <property name="PointC">
-            <bean class="org.example.Point">
-                <property name="x" value="0"/>
-                <property name="y" value="-20"/>
-            </bean>
+    <bean id="Triangle" class="org.example.Triangle">
+        <property name="points">
+            <list>
+                <ref bean="zeroPoint"/>
+                <ref bean="point2"/>
+                <ref bean="point3"/>
+            </list>
         </property>
     </bean>
-    <bean class="org.example.Point" id="zeroPoint" name="zeroPointName">
+    <bean class="org.example.Point" id="zeroPoint">
         <property name="x" value="0"/>
         <property name="y" value="0"/>
     </bean>
-    <alias name="Triangle" alias="triangle-alias2"/>
+    <bean class="org.example.Point" id="point2">
+        <property name="x" value="-20"/>
+        <property name="y" value="0"/>
+    </bean>
+    <bean class="org.example.Point" id="point3">
+        <property name="x" value="0"/>
+        <property name="y" value="-20"/>
+    </bean>
 </beans>
