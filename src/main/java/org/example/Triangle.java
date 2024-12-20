@@ -1,15 +1,16 @@
 package org.example;
 
-public class Triangle {
-    public Triangle(Point pointA, Point pointB, Point pointC) {
-        this.pointA = pointA;
-        this.pointB = pointB;
-        this.pointC = pointC;
-    }
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanNameAware;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
+public class Triangle implements ApplicationContextAware, BeanNameAware {
     private Point pointA;
     private Point pointB;
     private Point pointC;
+    private ApplicationContext context;
+
     public void draw(){
         System.out.println("Point A = ( " + pointA.getX() + ", " + pointA.getY() + " )");
         System.out.println("Point B = ( " + pointB.getX() + ", " + pointB.getY() + " )");
@@ -40,4 +41,13 @@ public class Triangle {
         this.pointC = pointC;
     }
 
+    @Override
+    public void setBeanName(String beanName) {
+        System.out.println("Bean Name: " + beanName);
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext context) throws BeansException {
+        this.context = context;
+    }
 }
