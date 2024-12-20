@@ -1,23 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans
+    default-init-method="my_init" default-destroy-method="clean_up"
     xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
 >
-    <bean id="ParentTriangle" class="org.example.Triangle" abstract="true">
-        <property name="points">
-            <list>
-                <ref bean="pointA"/>
-            </list>
-        </property>
-    </bean>
-    <bean id="Triangle1" class="org.example.Triangle" parent="ParentTriangle">
-        <property name="points">
-            <list merge="true">
-                <ref bean="pointB"/>
-                <ref bean="pointC"/>
-            </list>
-        </property>
+    <bean id="Triangle" class="org.example.Triangle" autowire="byName">
+        <property name="pointA" ref="pointA"/>
+        <property name="pointB" ref="pointB"/>
+        <property name="pointC" ref="pointC"/>
     </bean>
     <bean class="org.example.Point" id="pointA">
         <property name="x" value="0"/>
