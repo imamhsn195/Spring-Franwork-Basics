@@ -4,15 +4,20 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
 >
-    <bean id="ParentTriangle" class="org.example.Triangle">
-        <property name="pointA" ref="pointA" />
+    <bean id="ParentTriangle" class="org.example.Triangle" abstract="true">
+        <property name="points">
+            <list>
+                <ref bean="pointA"/>
+            </list>
+        </property>
     </bean>
     <bean id="Triangle1" class="org.example.Triangle" parent="ParentTriangle">
-        <property name="pointB" ref="pointB"/>
-        <property name="pointC" ref="pointC"/>
-    </bean>
-    <bean id="Triangle2" class="org.example.Triangle">
-        <property name="pointC" ref="pointC"/>
+        <property name="points">
+            <list merge="true">
+                <ref bean="pointB"/>
+                <ref bean="pointC"/>
+            </list>
+        </property>
     </bean>
     <bean class="org.example.Point" id="pointA">
         <property name="x" value="0"/>
