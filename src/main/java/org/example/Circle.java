@@ -1,15 +1,15 @@
 package org.example;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
 
 public class Circle implements Shape{
     public Point getCenter() {
         return center;
     }
 
-    @Autowired
-    @Qualifier("circleRelated")
+    @Resource(name = "pointA")
     public void setCenter(Point center) {
         this.center = center;
     }
@@ -19,5 +19,13 @@ public class Circle implements Shape{
     @Override
     public void draw() {
         System.out.println("Drawing circle with point (" + center.getX() + ", " + center.getY() + ")");
+    }
+    @PostConstruct
+    public void initializeCircle(){
+        System.out.println("Circle initialized here.");
+    }
+    @PreDestroy
+    public void destroyCircle(){
+        System.out.println("Destroy method called here.");
     }
 }
