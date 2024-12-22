@@ -1,17 +1,16 @@
 package org.example;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
-
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 
 @Component
-public class Circle implements Shape{
+public class Circle implements Shape, ApplicationEventPublisherAware {
     public Point getCenter() {
         return center;
     }
@@ -22,6 +21,7 @@ public class Circle implements Shape{
     }
 
     private Point center;
+    private ApplicationEventPublisher publisher;
 
     public MessageSource getMessageSource() {
         return messageSource;
@@ -38,6 +38,8 @@ public class Circle implements Shape{
     public void draw() {
         System.out.println(messageSource.getMessage("drawing.circle", null, "Message from Circle draw method", null));
         System.out.println(messageSource.getMessage("drawing.point", new Object[] { center.getX(), center.getY()}, "Drawing circle point default message", null));
+        DrawEvent drawEvent = new DrawEvent(this);
+        publisher.publishEvent(drawEvent);
     }
     @PostConstruct
     public void initializeCircle(){
@@ -46,5 +48,9 @@ public class Circle implements Shape{
     @PreDestroy
     public void destroyCircle(){
         System.out.println("Destroy method called here.");
+    }
+    @Override
+    public void setApplicationEventPublisher(ApplicationEventPublisher publisher) {
+        this.publisher = publisher;
     }
 }
